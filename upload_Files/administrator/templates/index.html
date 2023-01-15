@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width:device-width , initial-scale=1" charset="utf_8" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Django file upload example</title>
+	<script>
+		function submitForm(event, url) {
+			event.preventDefault();  // prevent the form from submitting normally
+			var form = document.getElementById('my_form');
+			form.action = url;       // change the form's action to the desired URL
+			form.submit();           // submit the form to the new URL
+		}
+	</script>
+  </head>
+  <body>
+	<h1> This is my file uploader and database updater site</h1>
+	
+	
+    <form enctype="multipart/form-data"  method="POST" id="my_form" class="container mt-5">
+      {% csrf_token %}
+      <input type="file" name="file" class="mt-5 text-info " />
+	  <br>
+	  <br>
+	  <button type="submit" class="btn btn-outline-success" onclick="submitForm(event, '{% url 'upload' %}')">Submit the file for whole deletion</button>
+	  <button type="submit" class="btn btn-success" onclick="submitForm(event, '{% url 'checkbox_uploaded_data' %}')">Submit the file for individual deletion</button>
+    </form>
+	
+	<div> 
+		<a href="{% url 'show_objects' %}">DISPLAY THE TRANSACTIONS IN THE SYSTEM</a>
+	
+	</div>
+	<!-- action="{% url 'upload' %}" -->
+  </body>
+</html>

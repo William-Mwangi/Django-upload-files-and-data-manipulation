@@ -1,0 +1,35 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Transactions</title>
+	<link rel="stylesheet" type="text/css" href="/static/style.css " />
+</head>
+<body class="primary">
+    <h1>The individual transactions</h1>
+    <table>
+        <thead>
+            <tr>
+				<th>num</th>
+                <th>Time</th>
+                <th>V1</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in objects %}
+            <tr>
+				<td>{{ forloop.counter }}</td>
+                <td>{{ obj.time }}</td>
+                <td>{{ obj.v1 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	
+	<br>
+	<br>
+	<a href="{% url 'home' %}">Return to upload page</a>
+</body>
+</html>

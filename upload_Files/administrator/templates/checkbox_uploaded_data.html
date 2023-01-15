@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %} 
+
+	<form method="post" action="{% url 'delete_selected_objects' %}">
+		{% csrf_token %}
+		<table>
+			<thead>
+				<th>Select</th>
+				<th>My Model Fields</th>
+			</thead>
+			<tbody>
+				{% for obj in processed_data %}
+					<tr>
+						<td>{{ forloop.counter }}<input type="checkbox" name="selected_items" value="{{ obj.pk }}"></td>
+						<td>{{ obj.time }} {{ obj.v1 }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<input type="submit" value="Delete selected objects">
+	</form>
+	
+	<br>
+	<footer>
+		<div>
+			<a href="{% url 'home' %}">Return to upload page</a>
+		
+		</div>
+	
+	</footer>
+{% endblock %}

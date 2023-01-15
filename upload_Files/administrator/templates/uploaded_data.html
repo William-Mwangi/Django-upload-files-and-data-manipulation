@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+<!-- <script>
+    // Get the div element
+    var div = document.getElementById('my-div');
+    // Set the max-height to the scrollHeight of the div
+    div.style.maxHeight = div.scrollHeight + "px";
+</script> -->
+
+{% block title %} <div style="margin:auto;" class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">Transaction details </div> {% endblock %}
+
+
+{% block content %} 
+	<h1>Processed Data</h1>
+	<div style="width: 50%; max-height: 85vh; border:double 9px black; left: 200px; overflow: scroll; overflow-y: scroll;">
+	
+	{% for obj in processed_data %}
+		<p class="text-primary">Transaction {{ forloop.counter }}: {{ obj.time }} 
+		 <input type="checkbox" name="object_ids" value="{{ obj.id }}" style="right:0px; float:right; padding:20px;" >
+		<br> {{ obj.v1 }}<hr> </p>
+	{% endfor %}
+	
+	
+	<div style=" width: 50%; float: left; padding: 20px; border: 2px solid black;">
+	<h3>Delete the transactions</h3>
+	<form action="{% url 'delete_all_objects' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Delete All files and their Transactions ">
+	</form>
+	</div>
+	
+	<div style=" width: 50%; float: left; padding: 20px;">
+	<!-- <form action="{% url 'delete_selected_objects' %}" method="POST">
+    {% csrf_token %}
+    {% for obj in objects %}
+	<h3>Delete the selected transactions</h3>
+        <input type="checkbox" name="object_ids" value="{{ obj.id }}">{{ obj }}<br>
+    {% endfor %}
+    <input type="submit" class="btn btn-outline-danger" value="Delete Selected Objects">
+	</form> -->
+
+	
+	</div>
+	</div>
+	
+	<br>
+	<br>
+	<footer>
+		<div>
+			<a href="{% url 'home' %}">Return to upload page</a>
+		
+		</div>
+	
+	</footer>
+
+
+
+{% endblock %}
